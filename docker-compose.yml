@@ -21,6 +21,6 @@ services:
                         - "443:443"
                 restart: always
                 volumes:
-                        - /var/www/html/gestion
+                        - ../www/:/var/www/html/gestion
                         - ./PHP/conf.d/
 
