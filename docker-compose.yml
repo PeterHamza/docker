@@ -11,16 +11,25 @@ services:
                         MYSQL_DATABASE: gestion_projet
 
         web:
-                build:
-                        context: ./PHP
-                depends_on:
-                        - db
-                image: 
-                ports:
-                        - "80:80"
-                        - "443:443"
-                restart: always
-                volumes:
-                        - ../www/:/var/www/html/gestion
-                        - ./PHP/conf.d/
-
+            build:
+                context: ./PHP
+            depends_on:
+                - db
+            image: 
+            ports:
+                - "80:80"
+                - "443:443"
+            restart: always
+            volumes:
+                - ../www/:/var/www/html/gestion
+                - ./PHP/conf.d/
+        storage:
+            image: minio/minio
+            volumes:
+                - ./minio-volume/:/export
+            ports:
+            - "9001:9000"
+            environment:
+                MINIO_ACCESS_KEY: admin
+                MINIO_SECRET_KEY: minio_secret_key
+            command: server /export
