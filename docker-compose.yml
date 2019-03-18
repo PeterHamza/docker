@@ -2,7 +2,7 @@ version: '2'
 
 services:
         db:
-                image: mysql/mysql:5.7
+                image: mysql:5.7
                 volumes:
                         - ./database/gestion_produit.sql
                 restart: always
